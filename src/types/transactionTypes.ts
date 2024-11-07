@@ -1,4 +1,5 @@
-import { PaginatedResponse } from "./generalTypes";
+import { Dispatch, SetStateAction } from "react";
+import { PaginatedResponse, QueryParametersState } from "./generalTypes";
 import { Product } from "./productTypes";
 import { User } from "./userTypes";
 
@@ -26,3 +27,38 @@ export type TransactionTypeBought = {
 };
 
 export type AllTransactionTypeBought = TransactionTypeBought[];
+
+export type AllTransactionsProps = {
+    transactions: Transaction[];
+}
+
+export type AllTransactionsGridProps = AllTransactionsProps & QueryParametersState
+
+export type PagingBtnTransactionProps = QueryParametersState & {
+    data: AllTransactions;
+}
+
+export type TransactionQueryParams = {
+    page?: number;
+    limit?: number;
+}
+
+export type TransactionSearchQueryParams =  TransactionQueryParams & {
+    sort_by?: "name" | "date";
+}
+
+export type TransactionTypeBoughtQueryParams = {
+    from?: string | null;
+    to?: string | null;
+}
+
+export type TransactionTypeBoughtProps = {
+    data: AllTransactionTypeBought;
+}
+
+export type TransactionTypeBoughtState = {
+    typeBoughtParams: TransactionTypeBoughtQueryParams;
+    setTypeBoughtParams: Dispatch<SetStateAction<TransactionTypeBoughtQueryParams>>;
+}
+
+export type TransactionTypeBoughtGridProps = TransactionTypeBoughtProps & TransactionTypeBoughtState

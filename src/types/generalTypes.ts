@@ -1,5 +1,6 @@
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { Dispatch, SetStateAction } from "react";
 
 export type errorMsgProps = {
     error: FetchBaseQueryError | SerializedError;
@@ -26,4 +27,14 @@ export interface PaginatedResponse {
     prev_page_url: string | null;
     to: number;
     total: number;
+}
+
+export type QueryParameters = {
+    limit: number,
+    page: number
+}
+
+export type QueryParametersState = {
+    queryParameters: QueryParameters,
+    setQueryParameters: Dispatch<SetStateAction<QueryParameters>>;
 }

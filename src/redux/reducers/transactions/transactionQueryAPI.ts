@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BASE_URI, TRANSACTION_BOUGHT, TRANSACTION_QUERY, TRANSACTION_SEARCH } from "../../../constants/apiBaseURI";
-import { AllTransactions, AllTransactionTypeBought, Transaction } from '../../../types/transactionTypes';
+import { AllTransactions, AllTransactionTypeBought, Transaction, TransactionQueryParams, TransactionSearchQueryParams, TransactionTypeBoughtQueryParams } from '../../../types/transactionTypes';
 
 //   GET|HEAD        api/transaction
 //   GET|HEAD        api/transaction/search
@@ -12,17 +12,27 @@ export const transactionQueryAPI = createApi({
   reducerPath: 'transactionQueryAPI',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URI }),
   endpoints: (builder) => ({
-    getAllTransactions: builder.query<AllTransactions, number | void>({
-      query: (page = 1) => `${TRANSACTION_QUERY}?page=${page}`,
+    getAllTransactions: builder.query<AllTransactions, TransactionQueryParams >({
+      query: ({page = 1, limit = 10}) => `${TRANSACTION_QUERY}?page=${page}&limit=${limit}`,
     }),
     getTransactionById: builder.query<Transaction, number>({
       query: (id) => `${TRANSACTION_QUERY}/${id}`,
     }),
-    getTransactionSearch: builder.query<AllTransactions, number | void>({
-      query: (page = 1) => `${TRANSACTION_SEARCH}?page=${page}`,
+    getTransactionSearch: builder.query<AllTransactions, TransactionSearchQueryParams>({
+      query: ({ page = 1, limit = 10, sort_by = 'name' }) =>
+        `${TRANSACTION_SEARCH}?page=${page}&limit=${limit}&sort_by=${sort_by}`,
     }),
-    getTypebought: builder.query<AllTransactionTypeBought, void>({
-      query: () => `${TRANSACTION_BOUGHT}`,
+    getTypebought: builder.query<AllTransactionTypeBought, TransactionTypeBoughtQueryParams>({
+      query: ({ from, to }) => {
+        let query = `${TRANSACTION_BOUGHT}`
+        if (from || to) {
+          const params = [];
+          if (from) params.push(`from=${from}`);
+          if (to) params.push(`to=${to}`);
+          query += `?${params.join('&')}`;
+        }
+        return query
+      },
     }),
   }),
 })

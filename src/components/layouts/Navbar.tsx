@@ -29,7 +29,7 @@ const Navbar = () => {
             >
               <li>
                 <NavLink
-                  to={"/"}
+                  to={"/transaction"}
                   className={({ isActive }) =>
                     isActive ? "btn btn-ghost text-primary" : "btn btn-ghost"
                   }
@@ -59,7 +59,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">
             <li>
               <NavLink
-                to={"/"}
+                to={"/transaction"}
                 className={({ isActive }) =>
                   isActive
                     ? "btn btn-ghost text-primary border-0 border-b-2 border-primary"
@@ -75,7 +75,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "btn btn-ghost text-primary border-0 border-b-2 border-primary"
-                    : "btn btn-circle btn-ghost"
+                    : "btn btn-ghost"
                 }
               >
                 Product

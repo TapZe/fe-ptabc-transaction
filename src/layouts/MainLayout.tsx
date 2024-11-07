@@ -6,12 +6,8 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="overflow-hidden flex-grow flex items-center self-center">
-        <main className="sm:mx-2 md:mx-6 lg:mx-10 xl:mx-20 my-10">
-          <div className="w-full">
-            <Outlet />
-          </div>
-        </main>
+      <div className="overflow-hidden flex-grow flex justify-center p-2 md:px-12 py-6">
+        <Outlet />
       </div>
       <Footer />
     </div>

@@ -8,7 +8,11 @@ import Fallback from "./components/Fallback";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Lazy-load when importing the pages
-const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Transaction = lazy(() => import("./pages/Transaction"));
+const TransactionTypeBought = lazy(
+  () => import("./pages/TransactionTypeBought")
+);
 
 const router = createBrowserRouter([
   {
@@ -25,6 +29,41 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Fallback />}>
             <Dashboard />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/transaction",
+    element: (
+      <Suspense fallback={<Fallback />}>
+        <MainLayout />
+      </Suspense>
+    ),
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: (
+          <Suspense fallback={<Fallback />}>
+            <Transaction />
+          </Suspense>
+        ),
+      },
+      // {
+      //   path: "search",
+      //   element: (
+      //     <Suspense fallback={<Fallback />}>
+      //       <TransactionSearch />
+      //     </Suspense>
+      //   ),
+      // },
+      {
+        path: "highestBought",
+        element: (
+          <Suspense fallback={<Fallback />}>
+            <TransactionTypeBought />
           </Suspense>
         ),
       },

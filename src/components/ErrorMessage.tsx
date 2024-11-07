@@ -22,12 +22,14 @@ const ErrorMessage: React.FC<errorMsgProps> = ({ error }) => {
   }
 
   return (
-    <div role="alert" className="alert alert-error">
-      <FontAwesomeIcon icon={faCircleXmark} />
-      <p>
-        An error has occurred:
-        <span> {error.message}</span>
-      </p>
+    <div>
+      <div role="alert" className="alert alert-error">
+        <FontAwesomeIcon icon={faCircleXmark} />
+        <p>
+          An error has occurred:
+          <span> {error.message}</span>
+        </p>
+      </div>
     </div>
   );
 };
