@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { PaginatedResponse, QueryParametersState } from "./generalTypes";
+import { PaginatedResponse } from "./generalTypes";
 import { Product } from "./productTypes";
-import { User } from "./userTypes";
 
 export type Transaction = {
     id: number;
@@ -12,7 +11,6 @@ export type Transaction = {
     user_id: number;
     created_at: string;
     updated_at: string;
-    user: User;
     product: Product;
 }
 
@@ -32,21 +30,26 @@ export type AllTransactionsProps = {
     transactions: Transaction[];
 }
 
-export type AllTransactionsGridProps = AllTransactionsProps & QueryParametersState
-
-export type PagingBtnTransactionProps = QueryParametersState & {
-    data: AllTransactions;
-}
-
+// Search Query
 export type TransactionQueryParams = {
     page?: number;
     limit?: number;
+    sort_by?: string | "name" | "date" | null;
+    name?: string;
 }
 
-export type TransactionSearchQueryParams =  TransactionQueryParams & {
-    sort_by?: "name" | "date";
+export type TransactionQueryParamsState = {
+    queryParameters: TransactionQueryParams,
+    setQueryParameters: Dispatch<SetStateAction<TransactionQueryParams>>;
 }
 
+export type AllTransactionsGridProps = AllTransactionsProps & TransactionQueryParamsState;
+
+export type PagingBtnTransactionProps = TransactionQueryParamsState & {
+    data: AllTransactions;
+}
+
+// Type Bought Query
 export type TransactionTypeBoughtQueryParams = {
     from?: string | null;
     to?: string | null;
@@ -62,3 +65,15 @@ export type TransactionTypeBoughtState = {
 }
 
 export type TransactionTypeBoughtGridProps = TransactionTypeBoughtProps & TransactionTypeBoughtState
+
+// Mutation
+export type TransactionMutationResponse = {
+    message: string;
+    transaction: Transaction;
+}
+
+export type AddTransactionParams = {
+    selled_stock: number;
+    product_id: number;
+    transaction_date?: string;
+}

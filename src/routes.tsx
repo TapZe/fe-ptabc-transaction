@@ -5,7 +5,6 @@ import { lazy, Suspense } from "react";
 import MainLayout from "./layouts/MainLayout";
 import Error404 from "./pages/Error404";
 import Fallback from "./components/Fallback";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 // Lazy-load when importing the pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -13,6 +12,7 @@ const Transaction = lazy(() => import("./pages/Transaction"));
 const TransactionTypeBought = lazy(
   () => import("./pages/TransactionTypeBought")
 );
+const AddTransaction = lazy(() => import("./pages/AddTransaction"));
 
 const router = createBrowserRouter([
   {
@@ -51,19 +51,19 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      // {
-      //   path: "search",
-      //   element: (
-      //     <Suspense fallback={<Fallback />}>
-      //       <TransactionSearch />
-      //     </Suspense>
-      //   ),
-      // },
       {
         path: "highestBought",
         element: (
           <Suspense fallback={<Fallback />}>
             <TransactionTypeBought />
+          </Suspense>
+        ),
+      },
+      {
+        path: "add",
+        element: (
+          <Suspense fallback={<Fallback />}>
+            <AddTransaction />
           </Suspense>
         ),
       },

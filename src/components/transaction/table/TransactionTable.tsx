@@ -14,6 +14,7 @@ const TransactionTable: React.FC<AllTransactionsProps> = ({ transactions }) => {
               <td>Selled Stock</td>
               <td>Transaction Date</td>
               <td>Product Type</td>
+              <td>Action</td>
             </tr>
           </thead>
           <tbody>

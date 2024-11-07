@@ -13,3 +13,9 @@ export type Product = {
     updated_at: string;
     type: ProductType;
 }
+
+export type AllProducts = Product[];
+
+export type AllProductProps = {
+    products: AllProducts;
+}

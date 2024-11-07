@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BASE_URI, TRANSACTION_BOUGHT, TRANSACTION_QUERY, TRANSACTION_SEARCH } from "../../../constants/apiBaseURI";
-import { AllTransactions, AllTransactionTypeBought, Transaction, TransactionQueryParams, TransactionSearchQueryParams, TransactionTypeBoughtQueryParams } from '../../../types/transactionTypes';
+import { AllTransactions, AllTransactionTypeBought, Transaction, TransactionQueryParams, TransactionTypeBoughtQueryParams } from '../../../types/transactionTypes';
 
 //   GET|HEAD        api/transaction
 //   GET|HEAD        api/transaction/search
@@ -18,9 +18,17 @@ export const transactionQueryAPI = createApi({
     getTransactionById: builder.query<Transaction, number>({
       query: (id) => `${TRANSACTION_QUERY}/${id}`,
     }),
-    getTransactionSearch: builder.query<AllTransactions, TransactionSearchQueryParams>({
-      query: ({ page = 1, limit = 10, sort_by = 'name' }) =>
-        `${TRANSACTION_SEARCH}?page=${page}&limit=${limit}&sort_by=${sort_by}`,
+    getTransactionSearch: builder.query<AllTransactions, TransactionQueryParams>({
+      query: ({ page = 1, limit = 10, sort_by, name }) => {
+        let query = `${TRANSACTION_SEARCH}?page=${page}&limit=${limit}`;
+        if (sort_by || name) {
+          const params = [];
+          if (sort_by) params.push(`sort_by=${sort_by}`);
+          if (name) params.push(`name=${name}`);
+          query += `&${params.join('&')}`;
+        }
+        return query;
+      },
     }),
     getTypebought: builder.query<AllTransactionTypeBought, TransactionTypeBoughtQueryParams>({
       query: ({ from, to }) => {

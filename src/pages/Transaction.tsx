@@ -2,17 +2,18 @@ import { useState } from "react";
 import ErrorMessage from "../components/ErrorMessage";
 import Fallback from "../components/Fallback";
 import TransactionGrid from "../components/transaction/TransactionGrid";
-import { useGetAllTransactionsQuery } from "../redux/reducers/transactions/transactionQueryAPI";
+import { useGetTransactionSearchQuery } from "../redux/reducers/transactions/transactionQueryAPI";
 import PaginationBtn from "../components/transaction/buttons/PaginationBtn";
-import { QueryParameters } from "../types/generalTypes";
+import { TransactionQueryParams } from "../types/transactionTypes";
 
 const Transaction = () => {
-  const [queryParameters, setQueryParameters] = useState<QueryParameters>({
-    page: 1,
-    limit: 10,
-  });
+  const [queryParameters, setQueryParameters] =
+    useState<TransactionQueryParams>({
+      page: 1,
+      limit: 10,
+    });
   const { data, isLoading, error } =
-    useGetAllTransactionsQuery(queryParameters);
+    useGetTransactionSearchQuery(queryParameters);
 
   return (
     <>

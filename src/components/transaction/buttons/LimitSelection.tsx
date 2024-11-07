@@ -1,6 +1,6 @@
-import { QueryParametersState } from "../../../types/generalTypes";
+import { TransactionQueryParamsState } from "../../../types/transactionTypes";
 
-const LimitSelection: React.FC<QueryParametersState> = ({
+const LimitSelection: React.FC<TransactionQueryParamsState> = ({
   queryParameters,
   setQueryParameters,
 }) => {

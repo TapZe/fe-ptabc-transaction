@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import TypeBoughtTable from "./table/TypeBoughtTable";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TransactionTypeBoughtGridProps } from "../../types/transactionTypes";
 import DateSelector from "./buttons/DateSelector";
+import BackToTransactionBtn from "./buttons/BackToTransactionBtn";
 
 const TransactionTypeBoughtGrid: React.FC<TransactionTypeBoughtGridProps> = ({
   data,
@@ -18,10 +16,7 @@ const TransactionTypeBoughtGrid: React.FC<TransactionTypeBoughtGridProps> = ({
           typeBoughtParams={typeBoughtParams}
         />
         <TypeBoughtTable data={data} />
-        <Link to={"/transaction"} className="btn btn-primary btn-outline">
-          <FontAwesomeIcon icon={faChevronLeft} />
-          Back to Transaction
-        </Link>
+        <BackToTransactionBtn />
       </div>
     </>
   );

@@ -16,6 +16,8 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 // Import reducer here
 import themeReducer from "./reducers/themeSlice";
 import { transactionQueryAPI } from "./reducers/transactions/transactionQueryAPI";
+import { transactionMutationAPI } from "./reducers/transactions/transactionMutationAPI";
+import { productQueryAPI } from "./reducers/product/productQueryAPI";
 
 const persistConfig = {
   key: "root",
@@ -35,13 +37,17 @@ export const store = configureStore({
   reducer: {
     persist: persistedReducer,
     [transactionQueryAPI.reducerPath]: transactionQueryAPI.reducer,
+    [transactionMutationAPI.reducerPath]: transactionMutationAPI.reducer,
+    [productQueryAPI.reducerPath]: productQueryAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(transactionQueryAPI.middleware),
+    }).concat(transactionQueryAPI.middleware)
+      .concat(transactionMutationAPI.middleware)
+      .concat(productQueryAPI.middleware),
 });
 
 // Setup persistor

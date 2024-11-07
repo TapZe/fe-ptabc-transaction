@@ -7,6 +7,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import LimitSelection from "./buttons/LimitSelection";
+import SortSelector from "./buttons/SortSelector";
+import SearchInput from "./buttons/SearchInput";
 
 const TransactionGrid: React.FC<AllTransactionsGridProps> = ({
   transactions,
@@ -21,7 +23,7 @@ const TransactionGrid: React.FC<AllTransactionsGridProps> = ({
             queryParameters={queryParameters}
             setQueryParameters={setQueryParameters}
           />
-          <Link to={"/"} className="btn btn-primary btn-outline">
+          <Link to={"/transaction/add"} className="btn btn-primary btn-outline">
             <FontAwesomeIcon icon={faPlusCircle} />
             Add Transaction
           </Link>
@@ -34,6 +36,16 @@ const TransactionGrid: React.FC<AllTransactionsGridProps> = ({
             <FontAwesomeIcon icon={faCashRegister} />
             Highest Bought Type
           </Link>
+        </div>
+        <div className="flex flex-row justify-between">
+          <SearchInput
+            queryParameters={queryParameters}
+            setQueryParameters={setQueryParameters}
+          />
+          <SortSelector
+            queryParameters={queryParameters}
+            setQueryParameters={setQueryParameters}
+          />
         </div>
         <TransactionTable transactions={transactions} />
       </div>
