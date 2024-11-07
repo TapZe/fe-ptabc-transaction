@@ -28,6 +28,7 @@ export type AllTransactionTypeBought = TransactionTypeBought[];
 
 export type AllTransactionsProps = {
     transactions: Transaction[];
+    refetch?: () => void;
 }
 
 // Search Query
@@ -76,4 +77,9 @@ export type AddTransactionParams = {
     selled_stock: number;
     product_id: number;
     transaction_date?: string;
+}
+
+export type UpdateTransactionParams = {
+    id: string;
+    transaction_date: string;
 }

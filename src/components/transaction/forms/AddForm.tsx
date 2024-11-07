@@ -6,7 +6,7 @@ import BackToTransactionBtn from "../buttons/BackToTransactionBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 
-const AddForm: React.FC<AllProductProps> = ({ products }) => {
+const AddForm: React.FC<AllProductProps> = ({ products, refetch }) => {
   const today = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState<AddTransactionParams>({
     selled_stock: 1,
@@ -15,6 +15,7 @@ const AddForm: React.FC<AllProductProps> = ({ products }) => {
   });
   const [addTransaction] = useAddNewTransactionMutation();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [currentProductMax, setCurrentProductMax] = useState(0);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -27,6 +28,13 @@ const AddForm: React.FC<AllProductProps> = ({ products }) => {
           ? Number(value)
           : value,
     });
+
+    if (name === "product_id") {
+      const product = products.find((product) => product.id === Number(value));
+      if (product) {
+        setCurrentProductMax(product.stock.quantity);
+      }
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -36,7 +44,9 @@ const AddForm: React.FC<AllProductProps> = ({ products }) => {
       await addTransaction(formData).unwrap();
 
       setShowSuccessAlert(true);
-      setFormData({ selled_stock: 0, product_id: 0, transaction_date: "" });
+      setFormData({ selled_stock: 1, product_id: 0, transaction_date: today });
+      setCurrentProductMax(0);
+      refetch();
 
       setTimeout(() => {
         setShowSuccessAlert(false);
@@ -74,7 +84,8 @@ const AddForm: React.FC<AllProductProps> = ({ products }) => {
             className="input input-bordered input-primary w-full max-w-md"
             type="number"
             name="selled_stock"
-            min={1}
+            min={currentProductMax > 0 ? 1 : 0}
+            max={currentProductMax}
             value={formData.selled_stock}
             onChange={handleChange}
             required
@@ -101,6 +112,12 @@ const AddForm: React.FC<AllProductProps> = ({ products }) => {
               </option>
             ))}
           </select>
+          <div className="label">
+            <span className="label-text-alt"></span>
+            <span className="label-text-alt">
+              In Stock: {currentProductMax}
+            </span>
+          </div>
         </div>
 
         <div className="mb-4">

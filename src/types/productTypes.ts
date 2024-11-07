@@ -5,6 +5,14 @@ export type ProductType =  {
     updated_at: string;
 }
 
+export type Stock = {
+    id: number;
+    quantity: number;
+    product_id: number;
+    created_at: string;
+    updated_at: string;
+}
+
 export type Product = {
     id: number;
     name: string;
@@ -12,10 +20,12 @@ export type Product = {
     created_at: string;
     updated_at: string;
     type: ProductType;
+    stock: Stock;
 }
 
 export type AllProducts = Product[];
 
 export type AllProductProps = {
     products: AllProducts;
+    refetch: () => void;
 }

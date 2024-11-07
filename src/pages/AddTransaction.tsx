@@ -4,13 +4,13 @@ import AddForm from "../components/transaction/forms/AddForm";
 import { useGetAllProductQuery } from "../redux/reducers/product/productQueryAPI";
 
 const AddTransaction = () => {
-  const { data, isLoading, error } = useGetAllProductQuery();
+  const { data, isLoading, error, refetch } = useGetAllProductQuery();
 
   return (
     <>
       {isLoading && <Fallback />}
       {error && <ErrorMessage error={error} />}
-      {data && <AddForm products={data} />}
+      {data && <AddForm products={data} refetch={refetch} />}
     </>
   );
 };

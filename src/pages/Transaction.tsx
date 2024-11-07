@@ -12,7 +12,7 @@ const Transaction = () => {
       page: 1,
       limit: 10,
     });
-  const { data, isLoading, error } =
+  const { data, isLoading, error, refetch } =
     useGetTransactionSearchQuery(queryParameters);
 
   return (
@@ -25,6 +25,7 @@ const Transaction = () => {
             transactions={data.data}
             setQueryParameters={setQueryParameters}
             queryParameters={queryParameters}
+            refetch={refetch}
           />
           <PaginationBtn
             data={data}

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BASE_URI, TRANSACTION_QUERY } from "../../../constants/apiBaseURI";
-import { AddTransactionParams, TransactionMutationResponse } from '../../../types/transactionTypes';
+import { AddTransactionParams, TransactionMutationResponse, UpdateTransactionParams } from '../../../types/transactionTypes';
 
 //   POST            api/transaction
 //   PUT|PATCH       api/transaction/{transaction}
@@ -18,10 +18,17 @@ export const transactionMutationAPI = createApi({
         body: newTransaction,
       }),
     }),
-    deleteTransaction: builder.mutation<TransactionMutationResponse, string>({
+    deleteTransaction: builder.mutation<TransactionMutationResponse, number>({
       query: (id) => ({
         url: `${TRANSACTION_QUERY}/${id}`,
         method: 'DELETE',
+      }),
+    }),
+    updateTransaction: builder.mutation<TransactionMutationResponse, UpdateTransactionParams>({
+      query: ({ id, transaction_date }) => ({
+        url: `${TRANSACTION_QUERY}/${id}`,
+        method: 'PUT',
+        body: { transaction_date },
       }),
     }),
   }),
@@ -29,4 +36,4 @@ export const transactionMutationAPI = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddNewTransactionMutation } = transactionMutationAPI
+export const { useAddNewTransactionMutation, useDeleteTransactionMutation, useUpdateTransactionMutation  } = transactionMutationAPI

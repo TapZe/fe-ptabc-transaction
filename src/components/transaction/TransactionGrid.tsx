@@ -14,6 +14,7 @@ const TransactionGrid: React.FC<AllTransactionsGridProps> = ({
   transactions,
   setQueryParameters,
   queryParameters,
+  refetch,
 }) => {
   return (
     <>
@@ -47,7 +48,7 @@ const TransactionGrid: React.FC<AllTransactionsGridProps> = ({
             setQueryParameters={setQueryParameters}
           />
         </div>
-        <TransactionTable transactions={transactions} />
+        <TransactionTable transactions={transactions} refetch={refetch} />
       </div>
     </>
   );

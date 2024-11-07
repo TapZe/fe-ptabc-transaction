@@ -1,7 +1,12 @@
 import { AllTransactionsProps } from "../../../types/transactionTypes";
 import { formatTransactionDateTable } from "../../../utils/dateFormating";
+import DeleteTransactionBtn from "../buttons/DeleteTransactionBtn";
+import EditTransactionBtn from "../buttons/EditTransactionBtn";
 
-const TransactionTable: React.FC<AllTransactionsProps> = ({ transactions }) => {
+const TransactionTable: React.FC<AllTransactionsProps> = ({
+  transactions,
+  refetch,
+}) => {
   return (
     <>
       <div className="overflow-x-auto">
@@ -28,6 +33,20 @@ const TransactionTable: React.FC<AllTransactionsProps> = ({ transactions }) => {
                   {formatTransactionDateTable(transaction.transaction_date)}
                 </td>
                 <td>{transaction.product.type.name}</td>
+                <td className="flex flex-wrap gap-2">
+                  {refetch && (
+                    <>
+                      <EditTransactionBtn
+                        transaction={transaction}
+                        refetch={refetch}
+                      />
+                      <DeleteTransactionBtn
+                        id={transaction.id}
+                        refetch={refetch}
+                      />
+                    </>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
