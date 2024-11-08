@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorMessage from "../components/ErrorMessage";
 import Fallback from "../components/Fallback";
 import TransactionGrid from "../components/transaction/TransactionGrid";
@@ -14,6 +14,10 @@ const Transaction = () => {
     });
   const { data, isLoading, error, refetch } =
     useGetTransactionSearchQuery(queryParameters);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <>

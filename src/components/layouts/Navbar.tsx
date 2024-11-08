@@ -29,6 +29,16 @@ const Navbar = () => {
             >
               <li>
                 <NavLink
+                  to={"/"}
+                  className={({ isActive }) =>
+                    isActive ? "btn btn-ghost text-primary" : "btn btn-ghost"
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to={"/transaction"}
                   className={({ isActive }) =>
                     isActive ? "btn btn-ghost text-primary" : "btn btn-ghost"
@@ -39,7 +49,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to={"/"}
+                  to={"/product"}
                   className={({ isActive }) =>
                     isActive ? "btn btn-ghost text-primary" : "btn btn-ghost"
                   }
@@ -59,6 +69,18 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">
             <li>
               <NavLink
+                to={"/"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "btn btn-ghost text-primary border-0 border-b-2 border-primary"
+                    : "btn btn-ghost"
+                }
+              >
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to={"/transaction"}
                 className={({ isActive }) =>
                   isActive
@@ -71,7 +93,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to={"/"}
+                to={"/product"}
                 className={({ isActive }) =>
                   isActive
                     ? "btn btn-ghost text-primary border-0 border-b-2 border-primary"

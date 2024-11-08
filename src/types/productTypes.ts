@@ -5,6 +5,13 @@ export type ProductType =  {
     updated_at: string;
 }
 
+export type AllProductTypes = ProductType[];
+
+export type AllProductTypeProps = {
+    productTypes: AllProductTypes;
+    refetch: () => void;
+}
+
 export type Stock = {
     id: number;
     quantity: number;
@@ -23,9 +30,34 @@ export type Product = {
     stock: Stock;
 }
 
+export type ProductProps = {
+    product: Product;
+    refetch: () => void;
+}
+
 export type AllProducts = Product[];
 
 export type AllProductProps = {
     products: AllProducts;
     refetch: () => void;
+}
+
+export type ProductMutationResponse = {
+    message?: string;
+    product?: Product;
+}
+
+export type AddProductParams = {
+    name: string; 
+    stock?: number; 
+    product_type_id?: number; 
+    product_type_name?: string; 
+}
+
+export type UpdateProductParams = {
+    name?: string;
+    stock?: number;
+    product_type_id?: number; 
+    product_type_name?: string; 
+    id: number;
 }

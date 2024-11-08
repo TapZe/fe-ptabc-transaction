@@ -13,6 +13,8 @@ const TransactionTypeBought = lazy(
   () => import("./pages/TransactionTypeBought")
 );
 const AddTransaction = lazy(() => import("./pages/AddTransaction"));
+const Product = lazy(() => import("./pages/Product"));
+const AddProduct = lazy(() => import("./pages/AddProduct"));
 
 const router = createBrowserRouter([
   {
@@ -64,6 +66,33 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Fallback />}>
             <AddTransaction />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/product",
+    element: (
+      <Suspense fallback={<Fallback />}>
+        <MainLayout />
+      </Suspense>
+    ),
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: (
+          <Suspense fallback={<Fallback />}>
+            <Product />
+          </Suspense>
+        ),
+      },
+      {
+        path: "add",
+        element: (
+          <Suspense fallback={<Fallback />}>
+            <AddProduct />
           </Suspense>
         ),
       },

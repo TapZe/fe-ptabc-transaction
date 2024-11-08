@@ -50,7 +50,7 @@ const AddForm: React.FC<AllProductProps> = ({ products, refetch }) => {
 
       setTimeout(() => {
         setShowSuccessAlert(false);
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.error("Failed to add transaction: ", error);
     }

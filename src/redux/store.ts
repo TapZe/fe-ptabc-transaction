@@ -18,6 +18,7 @@ import themeReducer from "./reducers/themeSlice";
 import { transactionQueryAPI } from "./reducers/transactions/transactionQueryAPI";
 import { transactionMutationAPI } from "./reducers/transactions/transactionMutationAPI";
 import { productQueryAPI } from "./reducers/product/productQueryAPI";
+import { productMutationAPI } from "./reducers/product/productMutationAPI";
 
 const persistConfig = {
   key: "root",
@@ -39,6 +40,7 @@ export const store = configureStore({
     [transactionQueryAPI.reducerPath]: transactionQueryAPI.reducer,
     [transactionMutationAPI.reducerPath]: transactionMutationAPI.reducer,
     [productQueryAPI.reducerPath]: productQueryAPI.reducer,
+    [productMutationAPI.reducerPath]: productMutationAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -47,7 +49,8 @@ export const store = configureStore({
       },
     }).concat(transactionQueryAPI.middleware)
       .concat(transactionMutationAPI.middleware)
-      .concat(productQueryAPI.middleware),
+      .concat(productQueryAPI.middleware)
+      .concat(productMutationAPI.middleware),
 });
 
 // Setup persistor
